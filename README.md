@@ -3,14 +3,8 @@
 rclone_sync 是一个用于定时同步的脚本，利用 rclone 工具将文件从一个位置同步到另一个位置。此脚本可通过 curl 或 wget 下载并立即执行。**如果直接将rclone同步的命令加入crontab并设置每小时同步，会导致出现上次同步还没结束又开启新一轮同步的问题。该脚本增加了是否有同步进程的检测，可以规避这一问题。**
 
 ## 一键脚本
-使用 curl 下载并执行
 ```
 curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | bash
-```
-
-使用 wget 下载并执行
-```
-wget -qO- https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | bash
 ```
 
 ## 依赖
@@ -26,13 +20,8 @@ wget -qO- https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone
 如果 rclone 未安装或未配置，请参考 rclone 官方文档 进行安装和配置。
 
 ## 脚本手动执行、修改（不推荐）
-使用 curl 下载
 ```
-curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
-```
-使用 wget 下载
-```
-wget -qO- https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
+curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh -o rclone_sync.sh
 ```
 赋予执行权限
 ```
