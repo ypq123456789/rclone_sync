@@ -2,11 +2,6 @@
 
 rclone_sync 是一个用于定时同步的脚本，利用 rclone 工具将文件从一个位置同步到另一个位置。**如果直接将rclone同步的命令加入crontab并设置每小时同步，会导致出现上次同步还没结束又开启新一轮同步的问题。该脚本增加了是否有同步进程的检测，可以规避这一问题。**
 
-## 一键脚本
-```
-sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | bash
-```
-
 ## 依赖
 
 - rclone
