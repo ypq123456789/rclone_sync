@@ -11,7 +11,7 @@ sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rcl
 
 - rclone
 - Unix-like 操作系统
-- curl 或 wget 工具
+- curl工具
 
 
 ## rclone 配置
