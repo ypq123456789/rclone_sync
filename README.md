@@ -28,8 +28,9 @@ rclone config
 如果 rclone 未配置，请参考[rclone 官方文档](https://rclone.org/docs/)进行安装和配置。  
 
 ## 脚本执行
+下载/更新脚本
 ```
-sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh -o rclone_sync.sh
+sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
 ```
 赋予执行权限
 ```
@@ -63,9 +64,6 @@ watch -n 1 "tail -n 10 /root/rclone.log"
 ```
 cat /root/rclone_sync.log
 ```
-## 脚本更新
-```
-sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
-```
+
 ## 贡献
 欢迎提交问题（Issues）和合并请求（Pull Requests）以改进此脚本。
