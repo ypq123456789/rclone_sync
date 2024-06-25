@@ -27,11 +27,11 @@ sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rcl
 ```
 赋予执行权限
 ```
-sudo cd /root && chmod +x rclone_sync.sh
+sudo chmod +x /root/rclone_sync.sh
 ```
 运行脚本
 ```
-sudo ./rclone_sync.sh
+sudo cd /root && ./rclone_sync.sh
 ```
 修改脚本
 ```
