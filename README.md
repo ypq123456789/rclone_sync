@@ -31,7 +31,7 @@ sudo chmod +x /root/rclone_sync.sh
 ```
 运行脚本
 ```
-sudo cd /root && ./rclone_sync.sh
+sudo ./root/rclone_sync.sh
 ```
 修改脚本
 ```
