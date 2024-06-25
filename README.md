@@ -37,7 +37,10 @@ sudo ./root/rclone_sync.sh
 ```
 sudo nano /root/rclone_sync.sh
 ```
-
+**把脚本里面下面这行中“rclone sync onedrive: aliapijiami: --transfers=4 --buffer-size=256M -P --no-update-modtime -u --size-only --log-file=/root/rclone.log --log-level DEBUG --tpslimit 4”修改为你自己的rclone同步命令，注意“--log-file=/root/rclone.log”不要改动！**
+```
+screen -r rclone -X stuff $'rclone sync onedrive: aliapijiami: --transfers=4 --buffer-size=256M -P --no-update-modtime -u --size-only --log-file=/root/rclone.log --log-level DEBUG --tpslimit 4\n'
+```
 ## 设置同步
 ```
 sudo echo -e "0 * * * * cd /root && ./rclone_sync.sh" | crontab -
