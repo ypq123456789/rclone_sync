@@ -15,9 +15,11 @@ sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rcl
 
 
 ## rclone 配置
-在使用此脚本之前，请确保你已经安装并配置好 rclone。你可以通过以下命令检查 rclone 是否安装：
-```rclone --version```
-如果 rclone 未安装或未配置，请参考 rclone 官方文档 进行安装和配置。
+在使用此脚本之前，请确保你已经安装并配置好 rclone。你可以通过以下命令检查 rclone 是否安装：  
+```
+rclone --version
+```  
+如果 rclone 未安装或未配置，请参考[rclone 官方文档](https://rclone.org/docs/)进行安装和配置。  
 
 ## 脚本手动执行、修改（不推荐）
 ```
