@@ -63,6 +63,9 @@ watch -n 1 "tail -n 10 /root/rclone.log"
 ```
 cat /root/rclone_sync.log
 ```
-
+## 脚本更新
+```
+sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
+```
 ## 贡献
 欢迎提交问题（Issues）和合并请求（Pull Requests）以改进此脚本。
