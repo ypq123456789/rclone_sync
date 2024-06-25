@@ -27,7 +27,7 @@ rclone config
 ```  
 如果 rclone 未配置，请参考[rclone 官方文档](https://rclone.org/docs/)进行安装和配置。  
 
-## 脚本手动执行、修改（不推荐）
+## 脚本执行
 ```
 sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh -o rclone_sync.sh
 ```
