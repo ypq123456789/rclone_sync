@@ -44,5 +44,16 @@ sudo echo -e "0 * * * * cd /root && ./rclone_sync.sh" | crontab -
 ```
 该效果为每小时切换到 /root 目录并执行 rclone_sync.sh 脚本。
 
+## 查看日志
+查看rclone日志
+```
+watch -n 1 "tail -n 10 /root/rclone.log"
+```
+
+查看rclone_sync日志
+```
+cat /root/rclone_sync.log
+```
+
 ## 贡献
 欢迎提交问题（Issues）和合并请求（Pull Requests）以改进此脚本。
