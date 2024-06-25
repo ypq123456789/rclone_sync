@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # 日志文件路径
 LOG_FILE="/root/rclone_sync.log"
 
@@ -19,7 +21,7 @@ echo "进入 rclone 窗口执行命令 at $(date)" >> $LOG_FILE
 echo "查看rclone日志"
 echo "查看rclone日志 at $(date)" >> $LOG_FILE
 sleep 3
-watch -n 1 "tail -n 10 /root/rclone.log"
+watch -n 1 "tail -n 10 /root/rclone.log" &
 
 # 等待任务完成
 while pgrep -f "rclone sync" > /dev/null; do
@@ -27,13 +29,10 @@ while pgrep -f "rclone sync" > /dev/null; do
 done
 
 # 检查同步任务是否成功
-pgrep -f "rclone sync"
-if [ $? -eq 0 ]; then
+if ! pgrep -f "rclone sync" > /dev/null; then
     echo "rclone 同步任务成功完成！" 
     echo "Sync completed at $(date)" >> $LOG_FILE
 else 
     echo "rclone 同步任务出现错误，请检查日志。" 
     echo "Sync failed at $(date)" >> $LOG_FILE
 fi
-
-
