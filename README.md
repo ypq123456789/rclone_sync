@@ -4,7 +4,7 @@ rclone_sync 是一个用于定时同步的脚本，利用 rclone 工具将文件
 
 ## 一键脚本
 ```
-curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | bash
+sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | bash
 ```
 
 ## 依赖
@@ -21,24 +21,24 @@ curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_s
 
 ## 脚本手动执行、修改（不推荐）
 ```
-curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh -o rclone_sync.sh
+sudo curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh -o rclone_sync.sh
 ```
 赋予执行权限
 ```
-cd /root && chmod +x rclone_sync.sh
+sudo cd /root && chmod +x rclone_sync.sh
 ```
 运行脚本
 ```
-./rclone_sync.sh
+sudo ./rclone_sync.sh
 ```
 修改脚本
 ```
-nano /root/rclone_sync.sh
+sudo nano /root/rclone_sync.sh
 ```
 
 ## 设置同步
 ```
-echo -e "0 * * * * cd /root && ./rclone_sync.sh" | crontab -
+sudo echo -e "0 * * * * cd /root && ./rclone_sync.sh" | crontab -
 ```
 该效果为每小时切换到 /root 目录并执行 rclone_sync.sh 脚本。
 
