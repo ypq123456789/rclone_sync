@@ -54,7 +54,7 @@ else
     echo "使用保存的 rclone sync 命令参数。"
     echo "$(date) 使用保存的 rclone sync 命令参数。" >> $LOG_FILE
     cat $COMMAND_FILE
-    echo "如果您想要修改这些参数，请输入 'y'："
+    echo "如果您想要修改这些参数，请在10s内输入 'y'："
     read -t 10 modify_choice
     if [ "$modify_choice" == "y" ]; then
         # 用户选择修改参数
