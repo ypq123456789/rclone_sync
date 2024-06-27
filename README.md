@@ -38,10 +38,17 @@ sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456
 sudo cd /root && ./rclone_sync.sh
 ```
 ## 由于本脚本在前台执行同步任务，建议在screen中执行
-
+安装screen
+```
+sudo apt-get install screen
+```
+创建并进入rclone窗口
+```
+screen -S rclone
+```
 在screen中执行脚本
 ```
-sudo apt-get install screen && screen -S rclone && sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh && chmod +x /root/rclone_sync.sh && cd /root && ./rclone_sync.sh
+sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh && chmod +x /root/rclone_sync.sh && cd /root && ./rclone_sync.sh
 ```
 脱离窗口
 ```
