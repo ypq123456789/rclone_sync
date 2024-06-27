@@ -58,12 +58,15 @@ ctrl+A，然后按D
 ```
 screen -r rclone
 ```
-## 设置同步
+## 同步
+**本脚本默认为您设置每小时**切换到 /root 目录并执行 rclone_sync.sh 脚本，命令如下
 ```
 sudo echo -e "0 * * * * cd /root && ./rclone_sync.sh" | crontab -
 ```
-该效果为每小时切换到 /root 目录并执行 rclone_sync.sh 脚本。
-
+如果你想要修改，使用以下命令自行编辑
+```
+sudo crontab -e
+```
 ## 查看日志
 查看rclone日志（建议在screen中执行脚本，回到主界面查看rclone日志）
 ```
