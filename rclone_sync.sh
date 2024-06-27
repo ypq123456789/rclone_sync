@@ -71,37 +71,10 @@ else
     fi
 fi
 
-# 启动 rclone sync 命令并将其放入后台运行
-echo "$(date) 启动 rclone sync 命令并将其放入后台运行" >> $LOG_FILE
-nohup bash -c "$(cat $COMMAND_FILE)" > /root/rclone.log 2>&1 &
+# 执行 rclone sync 命令
+echo "$(date) 执行 rclone sync 命令" >> $LOG_FILE
+bash -c "$(cat $COMMAND_FILE)"
 
-# 启动日志监视进程
-echo "$(date) 启动日志监视进程" >> $LOG_FILE
-(
-    previous_size=-1
-    while true; do
-        sleep 1  # 休眠一段时间，等待日志生成
-        current_size=$(stat --format=%s "/root/rclone.log")
-        if [ "$current_size" -eq "$previous_size" ]; then
-            # 如果文件尺寸没有改变，则继续
-            continue
-        else
-            # 打印日志的最新10行
-            echo "更新的日志："
-            tail -n 10 /root/rclone.log
-            previous_size=$current_size
-        fi
-        # 检查 rclone sync 进程是否仍在运行
-        if ! pgrep -f "rclone sync" > /dev/null; then
-            echo "rclone sync 任务已结束，停止监视日志。"
-            echo "$(date) rclone sync 任务已结束，停止监视日志。" >> $LOG_FILE
-            break
-        fi
-    done
-) &
-
-wait
-
-echo "rclone sync 任务和日志监视操作均已完成。"
-echo "$(date) rclone sync 任务和日志监视操作均已完成。" >> $LOG_FILE
+echo "rclone sync 任务已完成。"
+echo "$(date) rclone sync 任务已完成。" >> $LOG_FILE
 echo "---------------------------------------------" >> $LOG_FILE
