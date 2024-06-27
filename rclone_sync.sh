@@ -35,9 +35,11 @@ echo "$(date) 未找到正在运行的 'rclone sync' 进程，执行脚本。" >
 # 检查是否存在名为'rclone'的screen会话，如果不存在则创建。
 if ! screen -list | grep -q "rclone"; then
     echo "创建名为 'rclone' 的新screen会话。"
+    echo "$(date) 创建名为 'rclone' 的新screen会话。" >> $LOG_FILE
     screen -dmS rclone
 else 
     echo "名为 'rclone' 的screen会话已存在，继续执行。"
+    echo "$(date) 名为 'rclone' 的screen会话已存在，继续执行。" >> $LOG_FILE
 fi
 
 # 进入rclone会话并执行命令
