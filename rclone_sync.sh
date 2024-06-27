@@ -9,18 +9,28 @@ echo "---------------------------------------------" >> $LOG_FILE
 # 记录脚本执行开始时间
 start_time=$(date +%s)
 
-# 检查是否需要更新脚本...
-echo "检查是否需要更新脚本..."
+# 保存远程脚本的修改时间戳
+REMOTE_TIMESTAMP=$(curl -sI https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | grep "Last-Modified" | awk '{print \$3" "\$4" "\$5" "\$6" "\$7}')
+
+# 检查本地脚本是否存在
 if [ -f "/root/rclone_sync.sh" ]; then
-    local_sha=$(sha256sum /root/rclone_sync.sh | awk '{print \$1}')
-    remote_sha=$(curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | sha256sum | awk '{print \$1}')
-    if [ "$local_sha" != "$remote_sha" ]; then
+    # 保存本地脚本的修改时间戳
+    LOCAL_TIMESTAMP=$(date -r /root/rclone_sync.sh)
+
+    # 比较本地和远程脚本的时间戳
+    if [ "$REMOTE_TIMESTAMP" != "$LOCAL_TIMESTAMP" ]; then
         echo "发现新版本脚本，正在更新..."
         sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
         echo "脚本已更新，重新执行更新后的脚本。"
         bash /root/rclone_sync.sh
         exit
     fi
+else
+    echo "本地脚本不存在，正在下载远程脚本..."
+    sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
+    echo "脚本下载完成，执行脚本。"
+    bash /root/rclone_sync.sh
+    exit
 fi
 
 # 检查是否安装了rclone，若未安装则进行安装
