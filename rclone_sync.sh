@@ -3,17 +3,40 @@
 # 日志文件路径
 LOG_FILE="/root/rclone_sync.log"
 
-# 检查rclone是否已安装，若未安装则进行安装
+# 检查rclone是否已安装，如果未安装，则安装它
 if ! command -v rclone &> /dev/null; then
     echo "未找到rclone，正在安装..."
     echo "$(date) 未找到rclone，正在安装..." >> $LOG_FILE
     sudo -v && curl https://rclone.org/install.sh | sudo bash
+    
+    # 询问是否更换rclone二进制文件
+    echo "是否需要更换rclone的二进制文件？请在1min内输入直链网址，否则按回车继续。"
+    read -t 60 binary_link
+    if [ ! -z "$binary_link" ]; then
+        echo "正在从 $binary_link 下载rclone并安装到 /usr/bin/rclone 下..."
+        sudo curl -L $binary_link -o /tmp/rclone && sudo mv /tmp/rclone /usr/bin/rclone && sudo chmod +x /usr/bin/rclone
+        echo "$(date) 从 $binary_link 下载并安装rclone到 /usr/bin/rclone。" >> $LOG_FILE
+    fi
 else
     echo "rclone已经安装。"
     echo "$(date) rclone已经安装。" >> $LOG_FILE
 fi
 
-# 检查screen是否已安装，若未安装则进行安装
+# 在执行后续操作前，检查rclone配置文件
+config_file="/root/.config/rclone/rclone.conf"
+if [ -f "$config_file" ]; then
+    echo "rclone配置文件已存在。"
+    echo "$(date) rclone配置文件已存在。" >> $LOG_FILE
+else
+    echo "rclone配置文件不存在，请提供配置文件的直链网址："
+    read config_link
+    if [ ! -z "$config_link" ]; then
+        mkdir -p $(dirname "$config_file") && curl -L $config_link -o "$config_file"
+        echo "$(date) 从 $config_link 下载rclone配置文件到 $config_file。" >> $LOG_FILE
+    fi
+fi
+
+# 检查是否已安装screen，如果未安装，则安装它
 if ! command -v screen &> /dev/null; then
     echo "未找到screen，正在安装..."
     echo "$(date) 未找到screen，正在安装..." >> $LOG_FILE
