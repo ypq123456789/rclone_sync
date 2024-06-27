@@ -7,6 +7,17 @@ COMMAND_FILE="/root/rclone_command.txt"
 
 echo "---------------------------------------------" >> $LOG_FILE
 
+# 检查是否存在定时任务
+if ! crontab -l | grep -q "rclone_sync.sh"; then
+    # 添加新的定时任务
+    echo "未发现定时任务，正在添加新的定时任务..."
+    (crontab -l ; echo "0 * * * * cd /root && ./rclone_sync.sh") | crontab -
+    echo "$(date) 添加新的定时任务：0 * * * * cd /root && ./rclone_sync.sh" >> $LOG_FILE
+else
+    echo "已存在定时任务。"
+    echo "$(date) 已存在定时任务。" >> $LOG_FILE
+fi
+
 # 检查是否安装了rclone，若未安装则进行安装
 if ! command -v rclone &> /dev/null; then
     echo "rclone 未找到，正在安装..."
