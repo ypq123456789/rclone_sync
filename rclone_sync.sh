@@ -100,13 +100,22 @@ bash -c "$(cat $COMMAND_FILE)"
 # 记录脚本执行结束时间
 end_time=$(date +%s)
 
-# 计算脚本执行时间
+# 计算执行时间
 execution_time=$((end_time - start_time))
 
-# 输出执行时间到日志文件
-echo "脚本执行开始时间：$(date -d @$start_time)" >> $LOG_FILE
-echo "脚本执行结束时间：$(date -d @$end_time)" >> $LOG_FILE
-echo "脚本执行共用时：$execution_time 秒" >> $LOG_FILE
+# 将执行时间转换为小时、分钟和秒
+hours=$((execution_time / 3600))
+minutes=$(( (execution_time % 3600) / 60 ))
+seconds=$((execution_time % 60))
+
+# 根据执行时间的长度，选择合适的格式进行输出
+if [ $hours -gt 0 ]; then
+    echo "脚本执行共用时：$hours 小时 $minutes 分钟 $seconds 秒" >> $LOG_FILE
+elif [ $minutes -gt 0 ]; then
+    echo "脚本执行共用时：$minutes 分钟 $seconds 秒" >> $LOG_FILE
+else
+    echo "脚本执行共用时：$seconds 秒" >> $LOG_FILE
+fi
 
 echo "rclone sync 任务已完成."
 echo "$(date) rclone sync 任务已完成." >> $LOG_FILE
