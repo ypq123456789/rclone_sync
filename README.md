@@ -28,25 +28,17 @@ rclone config
 如果 rclone 未配置，请参考[rclone 官方文档](https://rclone.org/docs/)进行安装和配置。  
 
 ## 脚本执行
+一键脚本
+```
+sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh && chmod +x /root/rclone_sync.sh && cd /root && ./rclone_sync.sh
+```
 下载/更新脚本
 ```
 sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
 ```
-赋予执行权限
-```
-sudo chmod +x /root/rclone_sync.sh
-```
-运行脚本
+手动运行脚本
 ```
 sudo cd /root && ./rclone_sync.sh
-```
-修改脚本
-```
-sudo nano /root/rclone_sync.sh
-```
-**把脚本里面下面这行中“rclone sync onedrive: aliapijiami: --transfers=4 --buffer-size=256M -P --no-update-modtime -u --size-only --log-file=/root/rclone.log --log-level DEBUG --tpslimit 4”修改为你自己的rclone同步命令，注意“--log-file=/root/rclone.log”不要改动！**
-```
-screen -r rclone -X stuff $'rclone sync onedrive: aliapijiami: --transfers=4 --buffer-size=256M -P --no-update-modtime -u --size-only --log-file=/root/rclone.log --log-level DEBUG --tpslimit 4\n'
 ```
 ## 设置同步
 ```
