@@ -23,7 +23,6 @@ if [ -f "/root/rclone_sync.sh" ]; then
     fi
 fi
 
-
 # 检查是否安装了rclone，若未安装则进行安装
 if ! command -v rclone &> /dev/null; then
     echo "rclone 未找到，正在安装..."
