@@ -9,7 +9,7 @@ COMMAND_FILE="/root/rclone_command.txt"
 if ! command -v rclone &> /dev/null; then
     echo "rclone 未找到，正在安装..."
     echo "$(date) rclone 未找到，正在安装..." >> $LOG_FILE
-    sudo -v && curl https://rclone.org/install.sh | sudo bash
+    sudo apt install rclone
     # 询问是否更换rclone二进制文件
     echo "是否需要更换rclone的二进制文件？请在10s内输入直链网址，否则按回车继续。"
     read -t 10 binary_link
