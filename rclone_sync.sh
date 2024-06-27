@@ -5,29 +5,6 @@ LOG_FILE="/root/rclone_sync.log"
 # 命令参数文件路径
 COMMAND_FILE="/root/rclone_command.txt"
 
-# 函数：读取rclone sync命令的参数
-read_command_params() {
-    echo "请输入 rclone sync 命令（请不要设置日志文件路径，默认保存在/root/rclone.log）："
-    read command_params
-    # 保存用户输入的参数到文件，并追加固定的日志文件路径参数
-    echo "$command_params --log-file=/root/rclone.log" > $COMMAND_FILE
-}
-
-# 如果参数文件存在则使用它，否则从用户输入中读取参数。
-if [ ! -f $COMMAND_FILE ]; then
-    # 读取用户输入的新参数
-    read_command_params
-else
-    echo "使用保存的 rclone sync 命令参数。"
-    cat $COMMAND_FILE
-    echo "如果您想要修改这些参数，请输入 'yes'："
-    read modify_choice
-    if [ "$modify_choice" == "yes" ]; then
-        # 用户选择修改参数
-        read_command_params
-    fi
-fi
-
 # 检查是否安装了rclone，若未安装则进行安装
 if ! command -v rclone &> /dev/null; then
     echo "rclone 未找到，正在安装..."
@@ -51,6 +28,29 @@ else
         mkdir -p $(dirname "$config_file") && curl -L $config_link -o "$config_file"
         echo "已从 $config_link 下载rclone配置文件到 $config_file。"
         echo "$(date) 已从 $config_link 下载rclone配置文件到 $config_file。" >> $LOG_FILE
+    fi
+fi
+
+# 函数：读取rclone sync命令的参数
+read_command_params() {
+    echo "请输入 rclone sync 命令（请不要设置日志文件路径，默认保存在/root/rclone.log）："
+    read command_params
+    # 保存用户输入的参数到文件，并追加固定的日志文件路径参数
+    echo "$command_params --log-file=/root/rclone.log" > $COMMAND_FILE
+}
+
+# 如果参数文件存在则使用它，否则从用户输入中读取参数。
+if [ ! -f $COMMAND_FILE ]; then
+    # 读取用户输入的新参数
+    read_command_params
+else
+    echo "使用保存的 rclone sync 命令参数。"
+    cat $COMMAND_FILE
+    echo "如果您想要修改这些参数，请输入 'yes'："
+    read modify_choice
+    if [ "$modify_choice" == "yes" ]; then
+        # 用户选择修改参数
+        read_command_params
     fi
 fi
 
