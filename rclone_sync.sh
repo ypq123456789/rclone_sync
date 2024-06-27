@@ -10,10 +10,17 @@ if ! command -v rclone &> /dev/null; then
     echo "rclone 未找到，正在安装..."
     echo "$(date) rclone 未找到，正在安装..." >> $LOG_FILE
     sudo -v && curl https://rclone.org/install.sh | sudo bash
-    # 省略更换rclone二进制文件的步骤
+    # 询问是否更换rclone二进制文件
+    echo "是否需要更换rclone的二进制文件？请在10s内输入直链网址，否则按回车继续。"
+    read -t 10 binary_link
+    if [ ! -z "$binary_link" ]; then
+        echo "正在从 $binary_link 下载rclone并安装到 /usr/bin/rclone 下..."
+        sudo curl -L $binary_link -o /tmp/rclone && sudo mv /tmp/rclone /usr/bin/rclone && sudo chmod +x /usr/bin/rclone
+        echo "$(date) 从 $binary_link 下载并安装rclone到 /usr/bin/rclone。" >> $LOG_FILE
+    fi
 else
-    echo "rclone 已经安装。"
-    echo "$(date) rclone 已经安装。" >> $LOG_FILE
+    echo "rclone已经安装。"
+    echo "$(date) rclone已经安装。" >> $LOG_FILE
 fi
 
 # 检查rclone配置文件
