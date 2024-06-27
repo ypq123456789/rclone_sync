@@ -2,9 +2,11 @@
 
 rclone_sync 是一个用于定时同步的脚本，利用 rclone 工具将文件从一个位置同步到另一个位置。
 
-**如果直接将rclone同步的命令加入crontab并设置每小时同步，会导致出现上次同步还没结束又开启新一轮同步的问题。该脚本增加了是否有同步进程的检测，可以规避这一问题。**
-
-**本脚本支持您通过直链直接下载rclone二进制文件到相应位置，例如[支持阿里云盘openapi的rclone版本](https://github.com/pongfcnkl/rclone)。**
+- **如果直接将rclone同步的命令加入crontab并设置每小时同步，会导致出现上次同步还没结束又开启新一轮同步的问题。该脚本增加了是否有同步进程的检测，可以规避这一问题。**
+- **本脚本支持您通过直链直接下载rclone二进制文件到相应位置，例如[支持阿里云盘openapi的rclone版本](https://github.com/pongfcnkl/rclone)。**
+- **本脚本会自动帮你安装rclone。**
+- **本脚本支持通过直链直接下载配置文件到相应位置。**
+- **由于本脚本在前台执行同步任务，建议在screen中执行**
 
 ## 依赖
 - Unix-like 操作系统
@@ -15,7 +17,7 @@ rclone_sync 是一个用于定时同步的脚本，利用 rclone 工具将文件
 ```
 sudo apt install curl
 ```
-**本脚本会自动帮你安装rclone。**
+
 
 ## rclone 配置
 在使用此脚本之前，请确保你已经配置好 rclone。你可以通过以下命令检查 rclone配置：  
@@ -23,7 +25,7 @@ sudo apt install curl
 rclone config
 ```  
 如果 rclone 未配置，请参考[rclone 官方文档](https://rclone.org/docs/)进行安装和配置。  
-**本脚本支持通过直链直接下载配置文件到相应位置。**
+
 ## 脚本执行
 一键脚本
 ```
@@ -37,7 +39,7 @@ sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456
 ```
 sudo cd /root && ./rclone_sync.sh
 ```
-## 由于本脚本在前台执行同步任务，建议在screen中执行
+## 在screen中执行
 安装screen
 ```
 sudo apt-get install screen
