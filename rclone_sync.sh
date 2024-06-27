@@ -65,24 +65,10 @@ else
     fi
 fi
 
-# 检查screen是否安装，若未安装则进行安装
-if ! command -v screen &> /dev/null; then
-    echo "未找到screen，正在安装..."
-    echo "$(date) 未找到screen，正在安装..." >> $LOG_FILE
-    sudo apt-get update && sudo apt-get install screen -y
-else
-    echo "screen已经安装。"
-    echo "$(date) screen已经安装。" >> $LOG_FILE
-fi
-
-# 使用保存的命令参数执行rclone sync命令
-command_params=$(cat $COMMAND_FILE)
-echo "使用参数执行rclone命令：$command_params"
-# 运行的具体rclone sync命令，使用screen在后台执行
-screen -dmS rclone
-screen -r rclone -X stuff "$command_params\n"
-echo "进入rclone会话执行命令。"
-echo "$(date) 进入rclone会话并执行命令。" >> $LOG_FILE
+# 使用nohup在后台执行rclone sync命令，并将输出重定向到定制的日志文件
+nohup bash -c "$command_params" > /root/rclone.log 2>&1 &
+echo "使用nohup在后台执行rclone命令：$command_params"
+echo "$(date) 使用nohup在后台执行rclone命令。" >> $LOG_FILE
 
 # 查看rclone日志
 echo "查看rclone日志。"
