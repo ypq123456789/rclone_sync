@@ -52,10 +52,11 @@ if [ ! -f $COMMAND_FILE ]; then
     read_command_params
 else
     echo "使用保存的 rclone sync 命令参数。"
+    echo "$(date) 使用保存的 rclone sync 命令参数。" >> $LOG_FILE
     cat $COMMAND_FILE
-    echo "如果您想要修改这些参数，请输入 'yes'："
+    echo "如果您想要修改这些参数，请输入 'y'："
     read modify_choice
-    if [ "$modify_choice" == "yes" ]; then
+    if [ "$modify_choice" == "y" ]; then
         # 用户选择修改参数
         read_command_params
     fi
