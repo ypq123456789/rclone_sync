@@ -25,7 +25,7 @@ fi
 
 # 检查rclone配置文件
 config_file="/root/.config/rclone/rclone.conf"
-if [ -f "$config_file" ]; then
+if [ -f "$config_file" ];then
     echo "rclone 配置文件已存在。"
     echo "$(date) rclone 配置文件已存在。" >> $LOG_FILE
 else
@@ -55,10 +55,13 @@ else
     echo "$(date) 使用保存的 rclone sync 命令参数。" >> $LOG_FILE
     cat $COMMAND_FILE
     echo "如果您想要修改这些参数，请输入 'y'："
-    read modify_choice
+    read -t 10 modify_choice
     if [ "$modify_choice" == "y" ]; then
         # 用户选择修改参数
         read_command_params
+    else
+        echo "没有修改rclone sync命令。"
+        echo "$(date) 没有修改rclone sync命令。" >> $LOG_FILE
     fi
 fi
 
@@ -76,6 +79,7 @@ fi
 command_params=$(cat $COMMAND_FILE)
 echo "使用参数执行rclone命令：$command_params"
 # 运行的具体rclone sync命令，使用screen在后台执行
+screen -dmS rclone
 screen -r rclone -X stuff "$command_params\n"
 echo "进入rclone会话执行命令。"
 echo "$(date) 进入rclone会话并执行命令。" >> $LOG_FILE
