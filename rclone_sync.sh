@@ -5,6 +5,8 @@ LOG_FILE="/root/rclone_sync.log"
 # 命令参数文件路径
 COMMAND_FILE="/root/rclone_command.txt"
 
+echo "---------------------------------------------" >> $LOG_FILE
+
 # 检查是否安装了rclone，若未安装则进行安装
 if ! command -v rclone &> /dev/null; then
     echo "rclone 未找到，正在安装..."
@@ -102,3 +104,4 @@ wait
 
 echo "rclone sync 任务和日志监视操作均已完成。"
 echo "$(date) rclone sync 任务和日志监视操作均已完成。" >> $LOG_FILE
+echo "---------------------------------------------" >> $LOG_FILE
