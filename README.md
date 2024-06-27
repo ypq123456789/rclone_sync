@@ -75,7 +75,7 @@ watch -n 1 "tail -n 10 /root/rclone.log"
 
 查看rclone_sync日志
 ```
-cat /root/rclone_sync.log
+tail -n 30 /root/rclone_sync.log
 ```
 
 ## 贡献
