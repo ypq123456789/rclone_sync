@@ -11,15 +11,21 @@ start_time=$(date +%s)
 
 # 检查是否需要更新脚本...
 echo "检查是否需要更新脚本..."
+echo "$(date) 检查是否需要更新脚本..." >> $LOG_FILE
 if [ -f "/root/rclone_sync.sh" ]; then
     local_sha=$(sha256sum /root/rclone_sync.sh | cut -d ' ' -f 1)
     remote_sha=$(curl -s https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh | sha256sum | cut -d ' ' -f 1)
     if [ "$local_sha" != "$remote_sha" ]; then
         echo "发现新版本脚本，正在更新..."
+        echo "$(date) 发现新版本脚本，正在更新..." >> $LOG_FILE
         sudo curl -o /root/rclone_sync.sh -f https://raw.githubusercontent.com/ypq123456789/rclone_sync/main/rclone_sync.sh
         echo "脚本已更新，重新执行更新后的脚本。"
+        echo "$(date) 脚本已更新，重新执行更新后的脚本。" >> $LOG_FILE
         bash /root/rclone_sync.sh
         exit
+    else
+        echo "脚本已经是最新的，无需更新。"
+        echo "$(date) 脚本已经是最新的，无需更新。" >> $LOG_FILE
     fi
 fi
 
