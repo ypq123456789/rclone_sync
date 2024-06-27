@@ -50,7 +50,7 @@ screen -r rclone -X stuff $'rclone sync onedrive: aliapijiami: --transfers=4 --b
 ```
 ## 设置同步
 ```
-sudo echo -e "0 * * * * rclone lsf aliapi:\n0 * * * * cd /root && ./rclone_sync.sh" | crontab -
+sudo echo -e "0 * * * * cd /root && ./rclone_sync.sh" | crontab -
 ```
 该效果为每小时切换到 /root 目录并执行 rclone_sync.sh 脚本。
 
