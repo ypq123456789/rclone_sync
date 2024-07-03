@@ -27,6 +27,27 @@ sudo apt install curl
 rclone config
 ```  
 如果 rclone 未配置，请参考[rclone 官方文档](https://rclone.org/docs/)进行安装和配置。  
+## rclone_command.txt配置
+在这个脚本中，/root/rclone_command.txt 文件用于存储和读取 rclone sync 命令的参数。这个文件的主要作用是：
+### 持久化存储：
+当用户首次运行脚本并输入 rclone sync 命令参数时，这些参数会被保存到这个文件中。
+在后续运行脚本时，可以直接从这个文件读取之前保存的参数，而不需要用户每次都重新输入。
+### 方便修改：
+脚本会检查这个文件是否存在。如果存在，它会显示当前保存的参数，并询问用户是否需要修改。
+这样设计使得用户可以方便地查看和修改之前设置的 rclone sync 命令参数。
+### 命令执行：
+脚本最终执行 rclone sync 命令时，会直接读取这个文件中的内容作为命令参数。
+### 灵活性：
+通过将命令参数保存在单独的文件中，用户可以在不修改主脚本的情况下更改 rclone sync 的具体操作。
+### 安全性：
+将命令参数存储在单独的文件中，可以避免在主脚本中硬编码可能包含敏感信息的命令参数。
+
+### 怎么写？
+自行学习rclone文档。
+### 举个例子：
+```
+rclone sync onedrive: aliapijiami: --timeout=0 --transfers=4 --buffer-size=256M -P --no-update-modtime -u --size-only --log-level ERROR --tpslimit 4
+```
 
 ## 脚本执行
 一键脚本
