@@ -1,0 +1,4 @@
+# rclone sync 命令示例 (请替换为实际的源与目标)
+# 格式：rclone sync <源地址>: <目标地址>: [其他参数]
+# 示例：
+rclone sync onedrive: cloud: --transfers=4 --buffer-size=256M -P --no-update-modtime -u --size-only --log-level ERROR
